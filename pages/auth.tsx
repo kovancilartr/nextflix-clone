@@ -6,10 +6,8 @@ import { getSession, signIn } from "next-auth/react";
 import axios from "axios";
 import { NextPageContext } from "next";
 
-
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
-  console.log(session?.user?.name)
 
   if (session) {
     return {
@@ -42,28 +40,29 @@ const auth = () => {
 
   const login = useCallback(async () => {
     try {
-        await signIn ("credentials", {
-          email,
-          password,
-          redirect: false,
-          callbackUrl: "/",
-        })
+      await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+        callbackUrl: "/",
+      });
 
-        router.push("/profiles");
+      router.push("/profiles");
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
   }, [email, password, router]);
+
   const register = useCallback(async () => {
     try {
-        await axios.post("/api/register", {
-          email,
-          name,
-          password,
-        });
-        login();
+      await axios.post("/api/register", {
+        email,
+        name,
+        password,
+      });
+      login();
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
   }, [email, name, password, login]);
 
@@ -82,13 +81,13 @@ const auth = () => {
 
             <div className="flex flex-col gap-4">
               {variant === "register" && (
-                                <Input
-                                id="name"
-                                value={name}
-                                label="İsim soyisim"
-                                onChange={(e: any) => setName(e.target.value)}
-                                type="email"
-                              />
+                <Input
+                  id="name"
+                  value={name}
+                  label="İsim soyisim"
+                  onChange={(e: any) => setName(e.target.value)}
+                  type="email"
+                />
               )}
 
               <Input
@@ -106,7 +105,10 @@ const auth = () => {
                 type="password"
               />
             </div>
-            <button onClick={variant === "login" ? login : register} className="bg-red-600 py-3 text-white rounded-md mt-10 w-full hover:bg-red-800 transition">
+            <button
+              onClick={variant === "login" ? login : register}
+              className="bg-red-600 py-3 text-white rounded-md mt-10 w-full hover:bg-red-800 transition"
+            >
               {variant === "login" ? "Giriş Yap" : "Kayıt Ol"}
             </button>
             <div className="flex flex-row items-center justify-center gap-4 mt-10">
@@ -130,6 +132,6 @@ const auth = () => {
       </div>
     </div>
   );
-}
+};
 
 export default auth;

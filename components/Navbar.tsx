@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import NavItem from "./NavItem";
 import MobileMenu from "./MobileMenu";
 import AccountMenu from "./AccountMenu";
@@ -11,6 +11,23 @@ import {
 function Navbar() {
   const [mobileMenuItem, setMobileMenu] = useState(false);
   const [accountMenuItem, setAccountMenu] = useState(false);
+  const [showBack, setShowBack] = useState(false);
+
+  const topoffset = 65;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= topoffset) {
+        setShowBack(true);
+      } else {
+        setShowBack(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const toogleMobileMenu = useCallback(() => {
     setMobileMenu((current) => !current);
@@ -21,7 +38,7 @@ function Navbar() {
 
   return (
     <nav className="w-full fixed z-20 border-b-2 border-gray-800">
-      <div className="flex flex-row px-4 py-4 transition">
+      <div className={`flex flex-row px-4 py-4 transition ${showBack ? "bg-zinc-950 bg-opacity-95" : ""}`}>
         <img src="/images/logo.png" alt="logo" className="lg:h-8 h-6" />
         <div className="lg:flex flex-row hidden gap-7 ml-12">
           <NavItem name="Home" active />

@@ -20,8 +20,8 @@ function Navbar() {
   }, []);
 
   return (
-    <nav className="w-full fixed z-20">
-      <div className="flex flex-row px-4 py-6 transition">
+    <nav className="w-full fixed z-20 border-b-2 border-gray-800">
+      <div className="flex flex-row px-4 py-4 transition">
         <img src="/images/logo.png" alt="logo" className="lg:h-8 h-6" />
         <div className="lg:flex flex-row hidden gap-7 ml-12">
           <NavItem name="Home" active />

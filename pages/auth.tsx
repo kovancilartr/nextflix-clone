@@ -70,11 +70,16 @@ const auth = () => {
     <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-cover">
       <div className="bg-black w-full h-full bg-opacity-60">
         <nav className="px-12 py-6">
-          <img src="/images/logo.png" alt="" className="h-12" />
+          <a href="/">
+            <img src="/images/logo.png" alt="" className="h-12" />
+          </a>
         </nav>
 
         <div className="flex justify-center">
-          <div className="bg-black bg-opacity-85 px-20 py-20 self-center mt-2 lg:w-2/5 rounded-xl w-full">
+          <div className="bg-black bg-opacity-85 px-20 py-20 self-center mt-2 lg:w-2/5 rounded-xl w-full text-center">
+            <div className="flex justify-center">
+              <img src="/images/logo.png" alt="" className="h-5" />
+            </div>
             <h2 className="text-white text-4xl mb-8 font-semibold">
               {variant === "login" ? "Giriş Yap" : "Kayıt Ol"}
             </h2>
@@ -111,12 +116,8 @@ const auth = () => {
             >
               {variant === "login" ? "Giriş Yap" : "Kayıt Ol"}
             </button>
-            <div className="flex flex-row items-center justify-center gap-4 mt-10">
-              <div className="">
-                <FcGoogle className="text-4xl" />
-              </div>
-            </div>
-            <p className="text-neutral-600 mt-12">
+
+            <p className="text-neutral-600 mt-12 text-center">
               {variant === "login"
                 ? "Hesabınız yok mu?"
                 : "Benim zaten bir hesabım var."}
@@ -129,6 +130,10 @@ const auth = () => {
             </p>
           </div>
         </div>
+
+        <footer className="text-gray-400 text-sm text-center mt-12 fixed bottom-0 w-full">
+          <p>© 2024 Matflix | Kovancılar Yazılım</p>
+        </footer>
       </div>
     </div>
   );
